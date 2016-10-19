@@ -584,9 +584,6 @@ on load:
 		send "&2Dossier créée" to console
 	if file "plugins/Strikackers/StrikOfig.yml" doesn't exists: #Vérification du fichier
 		download file from "https://raw.githubusercontent.com/tutur1004/Strikackers/master/Strikupdater.sk" to file "plugins/Skript/scripts/Strikupdater.sk"
-#
-#	Récupération des données du YAML
-on load:
 	wait 1 second
-	SharkLoad("yolo")
+	SharkLoad("load")
 #
