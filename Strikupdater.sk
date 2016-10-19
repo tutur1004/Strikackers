@@ -66,7 +66,7 @@ on load:
 		set {_var.tps} to value "tps" get of "plugins/SharkStrike/config.yml"
 		delete script "plugins/SharkStrike/config.yml"
 		delete script "plugins/Skript/scripts/SharkStrike.sk"
-	if file "plugins/Strikackers/StrikOfig.yml" exists: #Vérification du fichier
+	if file "plugins/Strikackers/StrikOfig.yml" exists: #VÃ©rification du fichier
 		set {_var.prefix} to value "prefix" get of "plugins/Strikackers/StrikOfig.yml"
 		set {_var.perm-use} to value "perm-use" get of "plugins/Strikackers/StrikOfig.yml"
 		set {_var.perm-notify} to value "perm-notify" get of "plugins/Strikackers/StrikOfig.yml"
@@ -98,12 +98,12 @@ on load:
 		#
 		delete file "plugins/Strikackers/StrikOfig.yml"
 	#
-	if folder "plugins/Strikackers/" doesn't exists: #Vérification du dossier
+	if folder "plugins/Strikackers/" doesn't exists: #VÃ©rification du dossier
 		send "&e&lLe dossier plugins/Strikackers/ n'existe pas ! " to console
-		send "&aCréation du dossier en cours." to console
-		create folder "plugins/Strikackers/" #Création du dossier
-		send "&2Dossier créée" to console
-	download file from "####LINK####" to file "plugins/Strikackers/StrikOfig.yml"
+		send "&aCrÃ©ation du dossier en cours." to console
+		create folder "plugins/Strikackers/" #CrÃ©ation du dossier
+		send "&2Dossier crÃ©Ã©e" to console
+	download file from "https://github.com/tutur1004/Strikackers/raw/master/StrikOfig.yml" to file "plugins/Strikackers/StrikOfig.yml"
 	#
 	wait 1 tick
 	#
@@ -138,8 +138,8 @@ on load:
 	set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: %{_var.AntiAutoSneak}%"
 	set file "plugins/Strikackers/StrikOfig.yml"'s line 100 to "food: %{_var.food}%"
 	#
-	send "&2Update de &bStrikackers &2effectuée !" to console
-	download file from "####LINK####" to file "plugins/Skript/scripts/Strikackers.sk"
+	send "&2Update de &bStrikackers &2effectuÃ©e !" to console
+	download file from "https://github.com/tutur1004/Strikackers/raw/master/Strikackers.sk" to file "plugins/Skript/scripts/Strikackers.sk"
 	wait 1 tick
 	execute console command "skript reload Strikackers.sk"
 	delete script "plugins/Skript/scripts/%script%.sk"
