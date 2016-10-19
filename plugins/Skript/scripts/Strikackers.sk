@@ -1,14 +1,14 @@
 #	Ne pas modifier la version merci (sinon toutes vos configs seronts reset)
 #version: 1.2
-#########################
-#						#
-#		Strikackers		#
-#			par 		#
-#		 tutur1004		#
-#			et			#
-#		RanTheHorse		#
-#						#
-#########################
+# ########################
+  #						#
+  #		Strikackers		#
+  #			par 		#
+  #		 tutur1004		#
+  #			et			#
+  #		RanTheHorse		#
+  #						#
+  #########################
 
 #Ceci n'est pas un fichier de configuration !
 #Le fichier de config ce trouve dans votre fichier : "plugins/Strikackers/StrikOfig.yml"
