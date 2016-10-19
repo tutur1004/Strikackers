@@ -108,65 +108,65 @@ on load:
 	#
 	wait 1 tick
 	#
-	if {_var.prefix}is not "<none>":
+	if {_var.prefix} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 15 to "prefix: %{_var.prefix}%"
-	if {_var.mode-ts3}is not "<none>":
+	if {_var.mode-ts3} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 18 to "activer-ts3: %{_var.mode-ts3}%"
-	if {_var.ip-ts3}is not "<none>":
+	if {_var.ip-ts3} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 19 to "ip-ts3: %{_var.ip-ts3}%"
-	if {_var.port-ts3}is not "<none>":
+	if {_var.port-ts3} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 20 to "port-ts3: %{_var.port-ts3}%"
-	if {_var.perm-use}is not "<none>":
+	if {_var.perm-use} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 23 to "perm-use: %{_var.perm-use}%"
-	if {_var.perm-notify}is not "<none>":
+	if {_var.perm-notify} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 26 to "perm-notify: %{_var.perm-notify}%"
-	if {_var.perm-admin}is not "<none>":
+	if {_var.perm-admin} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 29 to "perm-admin: %{_var.perm-admin}%"
-	if {_var.perm-exempt}is not "<none>":
+	if {_var.perm-exempt} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 32 to "perm-exempt: %{_var.perm-exempt}%"
-	if {_var.plugin-efficiency}is not "<none>":
+	if {_var.plugin-efficiency} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 35 to "plugin-efficiency: %{_var.plugin-efficiency}%"
-	if {_var.lightning}is not "<none>":
+	if {_var.lightning} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 38 to "lightning-player: %{_var.lightning}%"
-	if {_var.sound-warn}is not "<none>":
+	if {_var.sound-warn} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 41 to "sound-warn: %{_var.sound-warn}%"
-	if {_var.sound-type}is not "<none>":
+	if {_var.sound-type} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 44 to "sound-type: %{_var.sound-type}%"
-	if {_var.ping}is not "<none>":
+	if {_var.ping} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 47 to "ping: %{_var.ping}%"
-	if {_var.tps}is not "<none>":
+	if {_var.tps} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 48 to "tps: %{_var.tps}%"
-	if {_var.eattime}is not "<none>":
+	if {_var.eattime} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 53 to "eattime: %{_var.eattime}%"
-	if {_var.bowcooldown}is not "<none>":
+	if {_var.bowcooldown} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 56 to "bowcooldown: %{_var.bowcooldown}%"
-	if {_var.MaxDist}is not "<none>":
+	if {_var.MaxDist} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 59 to "MaxDist: %{_var.MaxDist}%"
-	if {_var.SpeedHack}is not "<none>":
+	if {_var.SpeedHack} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 62 to "SpeedHack: %{_var.SpeedHack}%"
-	if {_var.DistanceFly}is not "<none>":
+	if {_var.DistanceFly} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 65 to "DistanceFly: %{_var.DistanceFly}%"
-	if {_var.AntiFlyTimming}is not "<none>":
+	if {_var.AntiFlyTimming} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 68 to "AntiFlyTimming: %{_var.AntiFlyTimming}%"
-	if {_var.AntiAutoFish}is not "<none>":
+	if {_var.AntiAutoFish} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: %{_var.AntiAutoFish}%"
-	if {_var.AntiFly}is not "<none>":
+	if {_var.AntiFly} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: %{_var.AntiFly}%"
-	if {_var.AntiSpeedHack}is not "<none>":
+	if {_var.AntiSpeedHack} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: %{_var.AntiSpeedHack}%"
-	if {_var.AntiSpeedBow}is not "<none>":
+	if {_var.AntiSpeedBow} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: %{_var.AntiSpeedBow}%"
-	if {_var.AntiReach}is not "<none>":
+	if {_var.AntiReach} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: %{_var.AntiReach}%"
-	if {_var.AntiAutoEat}is not "<none>":
+	if {_var.AntiAutoEat} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: %{_var.AntiAutoEat}%"
-	if {_var.AntiKnockback}is not "<none>":
+	if {_var.AntiKnockback} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: %{_var.AntiKnockback}%"
-	if {_var.waterwalk}is not "<none>":
+	if {_var.waterwalk} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: %{_var.waterwalk}%"
-	if {_var.AntiAutoSneak}is not "<none>":
+	if {_var.AntiAutoSneak} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: %{_var.AntiAutoSneak}%"
-	if {_var.food}is not "<none>":
+	if {_var.food} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 100 to "food: %{_var.food}%"
 	#
 	send "&2Update de &bStrikackers &2effectuée !" to console
