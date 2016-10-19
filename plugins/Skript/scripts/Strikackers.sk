@@ -8,7 +8,7 @@
   #			et			#
   #		RanTheHorse		#
   #						#
-  #########################
+# #########################
 
 #Ceci n'est pas un fichier de configuration !
 #Le fichier de config ce trouve dans votre fichier : "plugins/Strikackers/StrikOfig.yml"
@@ -52,7 +52,7 @@ function banpoint(name: player, point: number, reason: text):
 	set {_point} to {strikackers.plugin-efficiency} * {_point}
 	add {_point} to {ban.point.%{_uuid}%}
 	if "%{strikackers.lightning-player}%" = "On" or "on" or "true":
-		 lightning at {_name}
+		lightning at {_name}
 	if "%{strikackers.sound-warn}%" = "On" or "on" or "true":
 		play raw sound "%{strikackers.sound-type}%" at {_name} with pitch 1 volume 10
 	loop all players:
