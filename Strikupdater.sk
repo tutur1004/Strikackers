@@ -103,7 +103,7 @@ on load:
 		send "&aCréation du dossier en cours." to console
 		create folder "plugins/Strikackers/" #Création du dossier
 		send "&2Dossier créée" to console
-	download file from "https://github.com/tutur1004/Strikackers/raw/master/StrikOfig.yml" to file "plugins/Strikackers/StrikOfig.yml"
+	download file from "https://github.com/tutur1004/Strikackers/raw/master/plugins/Strikackers/StrikOfig.yml" to file "plugins/Strikackers/StrikOfig.yml"
 	#
 	wait 1 tick
 	#
@@ -139,7 +139,7 @@ on load:
 	set file "plugins/Strikackers/StrikOfig.yml"'s line 100 to "food: %{_var.food}%"
 	#
 	send "&2Update de &bStrikackers &2effectuée !" to console
-	download file from "https://github.com/tutur1004/Strikackers/raw/master/Strikackers.sk" to file "plugins/Skript/scripts/Strikackers.sk"
+	download file from "https://github.com/tutur1004/Strikackers/raw/master/plugins/Skript/scripts/Strikackers.sk" to file "plugins/Skript/scripts/Strikackers.sk"
 	wait 1 tick
 	execute console command "skript reload Strikackers.sk"
 	delete script "plugins/Skript/scripts/%script%.sk"
