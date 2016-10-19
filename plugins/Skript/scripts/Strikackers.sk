@@ -585,7 +585,7 @@ on load:
 		create folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" #Création du dossier
 		send "&2Dossier créée" to console
 	if file "plugins/Strikackers/StrikOfig.yml" doesn't exists: #Vérification du fichier
-		download file from "https://github.com/tutur1004/Strikackers/raw/master/Strikupdater.sk" to file "plugins/Skript/scripts/Strikupdater.sk"
+		download file from "https://raw.githubusercontent.com/tutur1004/Strikackers/master/Strikupdater.sk" to file "plugins/Skript/scripts/Strikupdater.sk"
 #
 #	Récupération des données du YAML
 on load:
