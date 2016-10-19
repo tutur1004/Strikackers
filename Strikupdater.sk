@@ -109,6 +109,7 @@ on load:
 	wait 1 tick
 	#
 	if {_var.prefix} is set:
+		broadcast "%{_var.prefix}%"
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 15 to "prefix: %{_var.prefix}%"
 	if {_var.mode-ts3} is set:
 		set file "plugins/Strikackers/StrikOfig.yml"'s line 18 to "activer-ts3: %{_var.mode-ts3}%"
