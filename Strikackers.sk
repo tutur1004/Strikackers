@@ -14,7 +14,7 @@
 #Le fichier de config ce trouve dans votre fichier : "plugins/Strikackers/StrikOfig.yml"
 
 #Merci de ne pas modifier ce Skript dans le cas ou vous ne savez pas ce que vous faites !
-#Si vous avez modifié et que le skript ne marche plus téléchargez simplement le dernier Updater
+#Si vous avez modifiÃ© et que le skript ne marche plus tÃ©lÃ©chargez simplement le dernier Updater
 #Sur le lien suivant : https://skript-mc.fr/forum/resources/strikackers-antihack.617/history
 
 #   NE SURTOUT PAS TOUCHER AU OPTIONS ICI MERCI !
@@ -28,7 +28,7 @@ options:
 
 #TeamSpeak, ressource par tutur1004 ( https://skript-mc.fr/forum/resources/teamspeak-autojoin.609/ )
 
-#	La function suivante, peut être utilisé dans tous les skript parrallèles.
+#	La function suivante, peut Ãªtre utilisÃ© dans tous les skript parrallÃ¨les.
 function teamspeak(name: player):
 	set {_pseudo} to {_name}
 	replace all "_" and "-" with "" in {_pseudo}
@@ -58,22 +58,22 @@ function banpoint(name: player, point: number, reason: text):
 	loop all players:
 		if loop-player has permission "perm-notify":
 			if {strikackers.admin.notif.%loop-player%} is true:
-				send "%{strikackers.prefix}%&4 >> %{_name}% est suspecté de %{_reason}%" to loop-player
+				send "%{strikackers.prefix}%&4 >> %{_name}% est suspectÃ© de %{_reason}%" to loop-player
 	if {ban.point.%{_uuid}%} > 100:
-		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Bannis &6par &bl'AntiCheat pour %{_reason}%!"
-		ban {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Bannis &6par &bl'AntiCheat pour %{_reason}%!"
+		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez Ã©tÃ© Bannis &6par &bl'AntiCheat pour %{_reason}%!"
+		ban {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez Ã©tÃ© Bannis &6par &bl'AntiCheat pour %{_reason}%!"
 		broadcast "&4/!\&c--------------------------------------------------------&4/!\"
-		broadcast "%{strikackers.prefix}%&4 >> %{_name}% a été Bannis &6par &bl'AntiCheat! pour %{_reason}%"
+		broadcast "%{strikackers.prefix}%&4 >> %{_name}% a Ã©tÃ© Bannis &6par &bl'AntiCheat! pour %{_reason}%"
 		broadcast "&4/!\&c--------------------------------------------------------&4/!\"		stop trigger
 	if {ban.point.%{_uuid}%} > 70:
-		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Kick &6par &bl'AntiCheat!"
+		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez Ã©tÃ© Kick &6par &bl'AntiCheat!"
 		stop trigger
 	if {ban.point.%{_uuid}%} > 10:
-		message "&cAttention, &bL'AntiCheat &cémet beaucoup d'avertissements envers vous !!" to {_name}
+		message "&cAttention, &bL'AntiCheat &cÃ©met beaucoup d'avertissements envers vous !!" to {_name}
 #	
 
 
-#	AntiAutoFish par Tutur1004 ####Début####
+#	AntiAutoFish par Tutur1004 ####DÃ©but####
 on fishing:
 	if "{strikackers.AntiAutoFish}" = "On" or "on" or "true":
 		add 1 to {fishing.pos.%player%}
@@ -102,7 +102,7 @@ on left click:
 	{check} is true
 	add 1 to {click.%player%}
 	{click.%player%} > 15
-	message "%{strikackers.prefix}% &4 >> Attention Click limité a &b 20 cps&4 !" to player
+	message "%{strikackers.prefix}% &4 >> Attention Click limitÃ© a &b 20 cps&4 !" to player
 	stop
 
 on left click:
@@ -216,7 +216,7 @@ on damage of a player :
 
 
 
-#Anti-Fast eat a modifier joel, refait entièrement par tutur1004
+#Anti-Fast eat a modifier joel, refait entiÃ¨rement par tutur1004
 on rightclick: 
 	if player is holding {@food}:
 		if "%{strikackers.AntiAutoEat}%" = "On" or "on" or "true":
@@ -240,7 +240,7 @@ on shoot:
 				cancel event
 				banpoint(shooter, 1, "FastBow")
 				wait 1 tick
-				kick the shooter due to "%{strikackers.prefix}% &4>> FastBow présumé!"
+				kick the shooter due to "%{strikackers.prefix}% &4>> FastBow prÃ©sumÃ©!"
 			set {fbow.%shooter%.last} to now
 #
 
@@ -316,42 +316,42 @@ on damage:
 #FREEZE by RanTheHorse
 command /freeze [<player>]:
 	permission: "freeze.perm"
-	permission message: &cVous n'ête pas modérateur
+	permission message: &cVous n'Ãªte pas modÃ©rateur
 	trigger:
 		set {freeze.%uuid of arg 1%} to true
 		set {freeze.freezer.%uuid of arg 1%} to "%player%"
-		send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%player% &9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3" to arg 1
+		send "%{strikackers.prefix}% &c>>> &9Vous avez Ã©tÃ© freeze par &1%player% &9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3" to arg 1
 		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
 			teamspeak(arg 1)
 		else:
-			send "&cMalheureusement, aucune IP n'a été renseignée."
+			send "&cMalheureusement, aucune IP n'a Ã©tÃ© renseignÃ©e."
 #
 on any move:
 	if {freeze.%uuid of player%} is true:
 		cancel event
-		send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
+		send "%{strikackers.prefix}% &c>>> &9Vous avez Ã©tÃ© freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
 		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
 			teamspeak(player)
 		else:
-			send "&cMalheureusement, aucune IP n'a été renseignée." to {freeze.freezer.%uuid of player%}
+			send "&cMalheureusement, aucune IP n'a Ã©tÃ© renseignÃ©e." to {freeze.freezer.%uuid of player%}
 			
 #
 on command:
 	if {freeze.%uuid of player%}:
 		if command is not "teamspeak" or "ts" or "ts3" or "teamspeak3":
 			cancel event
-			send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
+			send "%{strikackers.prefix}% &c>>> &9Vous avez Ã©tÃ© freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
 			if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
 				teamspeak(player)
 			else:
-				send "&cMalheureusement, aucune IP n'a été renseignée." to {freeze.freezer.%uuid of player%}
+				send "&cMalheureusement, aucune IP n'a Ã©tÃ© renseignÃ©e." to {freeze.freezer.%uuid of player%}
 #
 command /unfreeze [<player>]:
 	permission: "freeze.perm"
-	permission message: &cVous n'ête pas modérateur
+	permission message: &cVous n'Ãªte pas modÃ©rateur
 	trigger:
 		set {freeze.%uuid of arg 1%} to false
-		send "&2Vous n'êtes plus Freeze !" to arg 1
+		send "&2Vous n'Ãªtes plus Freeze !" to arg 1
 
 command /ts:
 	aliases: teamspeak, teamspeak3, ts3
@@ -359,7 +359,7 @@ command /ts:
 		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
 			teamspeak(player)
 		else:
-			send "&cMalheureusement, aucune IP n'a été renseignée."
+			send "&cMalheureusement, aucune IP n'a Ã©tÃ© renseignÃ©e."
 #Fin freeze
 
 
@@ -414,7 +414,7 @@ function SharkLoad(t: text):
 	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
 
 function SharkLogs(t: text):
-	create file "plugins/Sharkplugins/Strikackers/StrikOfig.yml/log/" #Création du fichier log
+	create file "plugins/Sharkplugins/Strikackers/StrikOfig.yml/log/" #CrÃ©ation du fichier log
 
 
 #
@@ -426,9 +426,9 @@ command /anticheat [<text>]:
 			send "&cErreur de syntaxe&6: &2/anticheat info"
 		if arg 1 is "info":
 			if {ban.point.%player%} is set:
-				send "&6Vous êtes à &b%{ban.point.%player%}%&a%% &6du bannissement."
+				send "&6Vous Ãªtes Ã  &b%{ban.point.%player%}%&a%% &6du bannissement."
 			else:
-				send "&2Félicitation aucune de vos actions n'a été suspectée de &bHack"
+				send "&2FÃ©licitation aucune de vos actions n'a Ã©tÃ© suspectÃ©e de &bHack"
 #
 command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]:
 	aliases: st-admin, anticheat-admin
@@ -440,11 +440,11 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 		if arg 1 is "reset":
 			delete file "plugins/Strikackers/StrikOfig.yml"
 			SharkFile("yolo")
-			send "&2La config a été parfaitement &4RESET"
+			send "&2La config a Ã©tÃ© parfaitement &4RESET"
 			wait 1 tick
 			execute console command "skript reload %script%"
 		if arg 1 is "reload":
-			send "&2La config a été parfaitement reload"
+			send "&2La config a Ã©tÃ© parfaitement reload"
 			wait 1 tick
 			execute console command "skript reload %script%"
 		if arg 1 is "Notif" or "Notifs":
@@ -453,10 +453,10 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 			else:
 				if arg 2 is "on" or "On":
 					set {strikackers.admin.notif.%player%} to true
-					send "&2Vos notifications de Cheat sont activées !"
+					send "&2Vos notifications de Cheat sont activÃ©es !"
 				if arg 2 is "Off" or "off":
 					set {strikackers.admin.notif.%player%} to false
-					send "&cVos notifications de Cheat sont désactivées !"
+					send "&cVos notifications de Cheat sont dÃ©sactivÃ©es !"
 		if arg 1 is "stats":
 			send ""
 			send ""
@@ -504,15 +504,15 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 		if arg 1 is "manage" or "config":
 			if arg 2 is not set:
 				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
-				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&bLa liste peut Ãªtre obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
 				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
 			if arg 2 = "reload" or "Reload":
 				SharkLoad("yolo")
-				send "&2Toutes vos configs ont été reload !!"
+				send "&2Toutes vos configs ont Ã©tÃ© reload !!"
 				stop trigger
 			if arg 3 is not set:
 				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
-				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&bLa liste peut Ãªtre obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
 				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
 			else:
 				if arg 3 = "On" or "on":
@@ -555,7 +555,7 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: Off"
 				if arg 2 = "all" or "All":
 					if arg 3 = "Off" or "off":
-						send "&6Vous avez &cdésactivé &6tous les Anti Hack"
+						send "&6Vous avez &cdÃ©sactivÃ© &6tous les Anti Hack"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: Off"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: Off"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: Off"
@@ -566,7 +566,7 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: Off"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: Off"
 					if arg 3 = "On" or "on":
-						send "&6Vous avez &aActivé &6tous les Anti Hack"
+						send "&6Vous avez &aActivÃ© &6tous les Anti Hack"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: On"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: On"
 						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: On"
@@ -579,15 +579,15 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 				SharkLoad("yolo")
 #
 on load:
-	if folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" doesn't exists: #Vérification du dossier
+	if folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" doesn't exists: #VÃ©rification du dossier
 		send "&e&lLe dossier plugins/Sharkplugins/Strikackers/StrikOfig.yml/ n'existe pas ! " to console
-		send "&aCréation du dossier en cours." to console
-		create folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" #Création du dossier
-		send "&2Dossier créée" to console
-	if file "plugins/Strikackers/StrikOfig.yml" doesn't exists: #Vérification du fichier
-		download file from "##LINK##" to file "plugins/Skript/scripts/noHax-Updater.sk"
+		send "&aCrÃ©ation du dossier en cours." to console
+		create folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" #CrÃ©ation du dossier
+		send "&2Dossier crÃ©Ã©e" to console
+	if file "plugins/Strikackers/StrikOfig.yml" doesn't exists: #VÃ©rification du fichier
+		download file from "https://github.com/tutur1004/Strikackers/raw/master/Strikupdater.sk" to file "plugins/Skript/scripts/Strikupdater.sk"
 #
-#	Récupération des données du YAML
+#	RÃ©cupÃ©ration des donnÃ©es du YAML
 on load:
 	wait 1 second
 	SharkLoad("yolo")
