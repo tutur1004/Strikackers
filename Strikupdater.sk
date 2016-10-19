@@ -175,4 +175,3 @@ on load:
 	execute console command "skript reload Strikackers.sk"
 	delete script "plugins/Skript/scripts/%script%.sk"
 #
-0
