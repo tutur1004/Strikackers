@@ -1,0 +1,146 @@
+#	FICHIER DE CONVERTION Sharkstrike --> Strikackers !!
+#	1.0/1 to 1.2
+
+on load:
+	if file "plugins/Skript/scripts/Strikackers.sk" exists:
+		delete file "plugins/Skript/scripts/Strikackers.sk"
+	if file "plugins/Skript/scripts/SharkStrike.sk" exists:
+		delete script "plugins/Skript/scripts/SharkStrike.sk"
+	if file "plugins/SharkStrike/config.yml" exists:
+		clear {sharkstrike.prefix}
+		clear {sharkstrike.perm-use}
+		clear {sharkstrike.perm-notify}
+		clear {sharkstrike.perm-admin}
+		clear {sharkstrike.perm-exempt}
+		clear {sharkstrike.plugin-efficiency}
+		clear {sharkstrike.pluginsme}
+		clear {sharkstrike.bowcooldown}
+		clear {sharkstrike.MaxDist}
+		clear {sharkstrike.SpeedHack}
+		clear {sharkstrike.AntiFlyTimming}
+		clear {sharkstrike.ip-ts3}
+		clear {sharkstrike.port-ts3}
+		clear {sharkstrike.food} 
+		clear {sharkstrike.mode-ts3}
+		clear {sharkstrike.AntiAutoFish}
+		clear {sharkstrike.eattime}
+		clear {sharkstrike.AntiFly}
+		clear {sharkstrike.AntiSpeedHack}
+		clear {sharkstrike.AntiSpeedBow}
+		clear {sharkstrike.AntiReach}
+		clear {sharkstrike.AntiAutoEat}
+		clear {sharkstrike.AntiKnockback}
+		clear {sharkstrike.waterwalk} 
+		clear {sharkstrike.AntiAutoSneak} 
+		clear {sharkstrike.FlyBloc} 
+		clear {sharkstrike.ping} 
+		clear {sharkstrike.tps}
+		#
+		set {_var.prefix} to value "prefix" get of "plugins/SharkStrike/config.yml"
+		set {_var.perm-use} to value "perm-use" get of "plugins/SharkStrike/config.yml"
+		set {_var.perm-notify} to value "perm-notify" get of "plugins/SharkStrike/config.yml"
+		set {_var.perm-admin} to value "perm-admin" get of "plugins/SharkStrike/config.yml"
+		set {_var.perm-exempt} to value "perm-exempt" get of "plugins/SharkStrike/config.yml"
+		set {_var.plugin-efficiency} to value "plugin-efficiency" get of "plugins/SharkStrike/config.yml"
+		set {_var.pluginsme} to value "pluginsme" get of "plugins/SharkStrike/config.yml"
+		set {_var.bowcooldown} to value "bowcooldown" get of "plugins/SharkStrike/config.yml"
+		set {_var.MaxDist} to value "MaxDist" get of "plugins/SharkStrike/config.yml"
+		set {_var.SpeedHack} to value "SpeedHack" get of "plugins/SharkStrike/config.yml"
+		set {_var.eattime} to value "eattime" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiFlyTimming} to value "AntiFlyTimming" get of "plugins/SharkStrike/config.yml"
+		set {_var.ip-ts3} to value "ip-ts3" get of "plugins/SharkStrike/config.yml"
+		set {_var.port-ts3} to value "port-ts3" get of "plugins/SharkStrike/config.yml"
+		set {_var.food} to value "food" get of "plugins/SharkStrike/config.yml"
+		set {_var.mode-ts3} to value "activer-ts3" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiAutoFish} to value "AntiAutoFish" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiFly} to value "AntiFly" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiSpeedHack} to value "AntiSpeedHack" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiSpeedBow} to value "AntiFastBow" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiReach} to value "AntiReach" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiAutoEat} to value "AntiFastEat" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiKnockback} to value "AntiKnockback" get of "plugins/SharkStrike/config.yml"
+		set {_var.waterwalk} to value "WaterWalk" get of "plugins/SharkStrike/config.yml"
+		set {_var.AntiAutoSneak} to value "AntiAutoSneak" get of "plugins/SharkStrike/config.yml"
+		set {_var.FlyBloc} to value "DistanceFly" get of "plugins/SharkStrike/config.yml"
+		set {_var.ping} to value "ping" get of "plugins/SharkStrike/config.yml"
+		set {_var.tps} to value "tps" get of "plugins/SharkStrike/config.yml"
+		delete script "plugins/SharkStrike/config.yml"
+		delete script "plugins/Skript/scripts/SharkStrike.sk"
+	if file "plugins/Strikackers/StrikOfig.yml" exists: #Vérification du fichier
+		set {_var.prefix} to value "prefix" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.perm-use} to value "perm-use" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.perm-notify} to value "perm-notify" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.perm-admin} to value "perm-admin" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.perm-exempt} to value "perm-exempt" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.plugin-efficiency} to value "plugin-efficiency" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.pluginsme} to value "pluginsme" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.bowcooldown} to value "bowcooldown" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.MaxDist} to value "MaxDist" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.SpeedHack} to value "SpeedHack" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.eattime} to value "eattime" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiFlyTimming} to value "AntiFlyTimming" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.ip-ts3} to value "ip-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.port-ts3} to value "port-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.food} to value "food" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.mode-ts3} to value "activer-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiAutoFish} to value "AntiAutoFish" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiFly} to value "AntiFly" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiSpeedHack} to value "AntiSpeedHack" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiSpeedBow} to value "AntiFastBow" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiReach} to value "AntiReach" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiAutoEat} to value "AntiFastEat" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiKnockback} to value "AntiKnockback" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.waterwalk} to value "WaterWalk" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.AntiAutoSneak} to value "AntiAutoSneak" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.FlyBloc} to value "DistanceFly" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.ping} to value "ping" get of "plugins/Strikackers/StrikOfig.yml"
+		set {_var.tps} to value "tps" get of "plugins/Strikackers/StrikOfig.yml"
+		#
+		delete file "plugins/Strikackers/StrikOfig.yml"
+	#
+	if folder "plugins/Strikackers/" doesn't exists: #Vérification du dossier
+		send "&e&lLe dossier plugins/Strikackers/ n'existe pas ! " to console
+		send "&aCréation du dossier en cours." to console
+		create folder "plugins/Strikackers/" #Création du dossier
+		send "&2Dossier créée" to console
+	download file from "####LINK####" to file "plugins/Strikackers/StrikOfig.yml"
+	#
+	wait 1 tick
+	#
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 15 to "prefix: %{_var.prefix}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 18 to "activer-ts3: %{_var.mode-ts3}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 19 to "ip-ts3: %{_var.ip-ts3}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 20 to "port-ts3: %{_var.port-ts3}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 23 to "perm-use: %{_var.perm-use}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 26 to "perm-notify: %{_var.perm-notify}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 29 to "perm-admin: %{_var.perm-admin}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 32 to "perm-exempt: %{_var.perm-exempt}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 35 to "plugin-efficiency: %{_var.plugin-efficiency}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 38 to "lightning-player: false"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 41 to "sound-warn: false"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 44 to "sound-type: mob.ghast.scream"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 47 to "ping: %{_var.ping}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 48 to "tps: %{_var.tps}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 53 to "eattime: %{_var.eattime}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 56 to "bowcooldown: %{_var.bowcooldown}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 59 to "MaxDist: %{_var.MaxDist}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 62 to "SpeedHack: %{_var.SpeedHack}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 65 to "DistanceFly: %{_var.DistanceFly}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 68 to "AntiFlyTimming: %{_var.AntiFlyTimming}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: {_var.AntiAutoFish}"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: %{_var.AntiFly}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: %{_var.AntiSpeedHack}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: %{_var.AntiSpeedBow}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: %{_var.AntiReach}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: %{_var.AntiAutoEat}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: %{_var.AntiKnockback}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: %{_var.waterwalk}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: %{_var.AntiAutoSneak}%"
+	set file "plugins/Strikackers/StrikOfig.yml"'s line 100 to "food: %{_var.food}%"
+	#
+	send "&2Update de &bStrikackers &2effectuée !" to console
+	download file from "####LINK####" to file "plugins/Skript/scripts/Strikackers.sk"
+	wait 1 tick
+	execute console command "skript reload Strikackers.sk"
+	delete script "plugins/Skript/scripts/%script%.sk"
+#

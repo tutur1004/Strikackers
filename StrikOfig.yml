@@ -1,0 +1,102 @@
+    #############################
+    #							#
+    #    Skript Strikackers     #
+    #        Config File        #
+    #							#
+    #############################
+
+#Crédits: Auteurs tutur1004 et RanTheHorse, Imaginé par Sharky-Legend
+
+#Config.yml File écrites par tutur1004
+
+#Config générales du plugin :
+
+#Prefix (Le mot qui sera devant chaque messages)
+prefix: §e[Shark-Strike]
+
+#	Système de d'auto connection au TeamSpeak3 (Skript par tutur1004 https://skript-mc.fr/forum/resources/teamspeak-autojoin.609/) Mettre false pour désactiver le ts3
+activer-ts3: false
+ip-ts3: 0.0.0.0			#METTRE ICI VOTRE IP sous la forme ip numérique
+port-ts3: 25565			#METRE ICI VOTRE PORT
+
+#Permission pour acceder à la commande /anticheat
+perm-use: anticheat.use
+
+#Permission pour voir les alertes anticheat
+perm-notify: anticheat.notify
+
+#Permission commandes admins /sharkstrike-admin
+perm-admin: anticheat.admin
+
+#Permission jamais ban / kick
+perm-exempt: anticheat.exempt
+
+#Options de sévéritée (Chiffre entier de 1 à 100), Faible : 1, Moyen : 2, Dur : 5, Sévère : 8, Tyranique : 12, Inquisitor : 15, InstantBan : 100
+plugin-efficiency: 5
+
+#Active / Désactive le fait de lancer un éclair lorsque le joueur est pris à Cheater
+lightning-player: Off
+
+#Active / Désactive le fait d'envoyer un son au joueur qui est pris à Cheater
+sound-warn: Off
+
+#Spécifier le son à envoyer au joueurs (Liste des sons ici : https://www.spigotmc.org/wiki/cc-sounds-list/ )
+sound-type: mob.ghast.scream
+
+#Sécurité de PING mini et TPS mini (TPS conseillé à 15) (PING conseillé à 150) mettre 'false' pour désactiver l'utilisation
+ping: false
+tps: false
+
+#### Options de Calibrage de l'AntiHack ####
+
+#Temps pour manger un item (ajouter ' seconds' après le chiffre)					#Recomandé: '0.8 seconds'
+eattime: 0.8
+
+#Délai entre 2 flèches (ajouter ' seconds' après le chiffre)						#Recomandé: '0.5 seconds'
+bowcooldown: 0.5 seconds
+
+#Distance maximale entre deux joueurs pour mettre un coup							#Recomandé: '5'
+MaxDist: 5
+
+#Distance maximale parcourus en 0.5 seconde (Certains Chevaux font 8bloc/s			#Recomandé: '8'
+SpeedHack: 10
+
+#Hauteur maximale parcourus en 1 seconde (Certains Chevaux font 5bloc/s				#Recomandé: '5'
+DistanceFly: 5
+
+#Temps en secondes entre chaques Check de antiFly									#Recomandé: '5'
+AntiFlyTimming: 10
+
+#	Activer / Désactiver les AntiCheat (On = activé)
+
+#Active ou désactive l'antiAutoFish.#
+AntiAutoFish: false
+
+#Active ou désactive l'AntiFly.#
+AntiFly: false
+
+#Active ou désactive l'Anti SpeedHack.#
+AntiSpeedHack: false
+
+#Active ou désactive l'Anti FastBow.#
+AntiFastBow: false
+
+#Active ou désactive l'anti ReachHack (ou si vous n'aimez pas PewDiePie :/)
+AntiReach: false
+
+#Active ou désactive l'anti FastEat
+AntiFastEat: false
+
+#Active ou désactive l'anti KnockBack
+AntiKnockback: false
+
+#Active ou désactive l'anti Water Walk / Jesus mode
+WaterWalk: false
+
+#Active ou désactive l'anti AutoSneak
+AntiAutoSneak: false
+
+#	Merci de ne pas modifier la ligne des food si vous ne savez pas ce qu'elle représente !
+food: any apple or mushroom soup or bread or any porkchop or any fish or cookie or melon slice or any beef or any chicken or any carrot or potato or baked potato or pumpkin pie or cooked rabbit or rabbit stew or cooked mutton
+#
+#

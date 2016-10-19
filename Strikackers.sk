@@ -1,0 +1,594 @@
+#	Ne pas modifier la version merci (sinon toutes vos configs seronts reset)
+#version: 1.2
+#########################
+#						#
+#		Strikackers		#
+#			par 		#
+#		 tutur1004		#
+#			et			#
+#		RanTheHorse		#
+#						#
+#########################
+
+#Ceci n'est pas un fichier de configuration !
+#Le fichier de config ce trouve dans votre fichier : "plugins/Strikackers/StrikOfig.yml"
+
+#Merci de ne pas modifier ce Skript dans le cas ou vous ne savez pas ce que vous faites !
+#Si vous avez modifié et que le skript ne marche plus téléchargez simplement le dernier Updater
+#Sur le lien suivant : https://skript-mc.fr/forum/resources/strikackers-antihack.617/history
+
+#   NE SURTOUT PAS TOUCHER AU OPTIONS ICI MERCI !
+options:
+    food: any apple or mushroom soup or bread or any porkchop or any fish or cookie or melon slice or any beef or any chicken or any carrot or potato or baked potato or pumpkin pie or cooked rabbit or rabbit stew or cooked mutton
+    AntiFlyTiming: 10
+    ip: 0.0.0.0
+    port: 00000
+#   NE SURTOUT PAS TOUCHER AU OPTIONS ICI MERCI !
+
+
+#TeamSpeak, ressource par tutur1004 ( https://skript-mc.fr/forum/resources/teamspeak-autojoin.609/ )
+
+#	La function suivante, peut être utilisé dans tous les skript parrallèles.
+function teamspeak(name: player):
+	set {_pseudo} to {_name}
+	replace all "_" and "-" with "" in {_pseudo}
+	send "&6Pour rejoindre notre TeamSpeak cliquez sur ce lien&c:" to {_name}
+	execute console command "tellraw %{_name}% [{""text"":"">> [TeamSpeak 3 Direct Link] <<"",""color"":""blue"",""bold"":true,""clickEvent"":{""action"":""open_url"",""value"":""http://yolofamily.fr/ts3/{@port}/%{_pseudo}%/{@ip}""},""hoverEvent"":{""action"":""show_text"",""value"":{""text"":"""",""extra"":[{""text"":""Rejoindre le TeamSpeak 3 !"",""color"":""gray""}]}}}]"
+#
+
+#	La function suivante permet de calculer le % d'infractions du joueurs, si c'est + de 100 on le BAN
+function banpoint(name: player, point: number, reason: text):
+	if {strikackers.ping} is not "Off" or "off" or "false":
+		if {_name}'s ping > {strikackers.ping}:
+			stop trigger
+		{_ping} = {strikackers.ping} - {strikackers.ping} - {strikackers.ping}
+		if {_name}'s ping < {_ping}:
+			stop trigger
+	if {strikackers.tps} is not "Off" or "off" or "false":
+		set {_tps} to tps
+		if {strikackers.tps} > {_tps}:
+			stop trigger
+	set {_uuid} to uuid of {_name}
+	set {_point} to {strikackers.plugin-efficiency} * {_point}
+	add {_point} to {ban.point.%{_uuid}%}
+	if "%{strikackers.lightning-player}%" = "On" or "on" or "true":
+		 lightning at {_name}
+	if "%{strikackers.sound-warn}%" = "On" or "on" or "true":
+		play raw sound "%{strikackers.sound-type}%" at {_name} with pitch 1 volume 10
+	loop all players:
+		if loop-player has permission "perm-notify":
+			if {strikackers.admin.notif.%loop-player%} is true:
+				send "%{strikackers.prefix}%&4 >> %{_name}% est suspecté de %{_reason}%" to loop-player
+	if {ban.point.%{_uuid}%} > 100:
+		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Bannis &6par &bl'AntiCheat pour %{_reason}%!"
+		ban {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Bannis &6par &bl'AntiCheat pour %{_reason}%!"
+		broadcast "&4/!\&c--------------------------------------------------------&4/!\"
+		broadcast "%{strikackers.prefix}%&4 >> %{_name}% a été Bannis &6par &bl'AntiCheat! pour %{_reason}%"
+		broadcast "&4/!\&c--------------------------------------------------------&4/!\"		stop trigger
+	if {ban.point.%{_uuid}%} > 70:
+		kick {_name} due to "%{strikackers.prefix}%&4 >> &cVous avez été Kick &6par &bl'AntiCheat!"
+		stop trigger
+	if {ban.point.%{_uuid}%} > 10:
+		message "&cAttention, &bL'AntiCheat &cémet beaucoup d'avertissements envers vous !!" to {_name}
+#	
+
+
+#	AntiAutoFish par Tutur1004 ####Début####
+on fishing:
+	if "{strikackers.AntiAutoFish}" = "On" or "on" or "true":
+		add 1 to {fishing.pos.%player%}
+		if {fishing.pos.%player%} > 3:
+			chance of 25%:
+				cancel event
+				message "&bPlus de poissons ici &b:("
+				stop trigger
+			if {fishing.pos.%player%} > 5:
+				cancel event
+				message "&bPlus de poissons ici &b:("
+on any move:
+	if "%{strikackers.AntiAutoFish}%" = "On" or "on" or "true":
+		clear {fishing.pos.%player%}
+#	AntiAutoFish par Tutur1004 ####Fin####
+
+
+#Anti-auto craft par Sharky-Legend
+every 4 seconds:
+	set {check} to true
+	wait 1 second
+	set {check} to false
+	loop all players:
+		delete {click.%loop-player%}
+on left click:
+	{check} is true
+	add 1 to {click.%player%}
+	{click.%player%} > 15
+	message "%{strikackers.prefix}% &4 >> Attention Click limité a &b 20 cps&4 !" to player
+	stop
+
+on left click:
+	{check} is true
+	add 1 to {click.%player%}
+	{click.%player%} > 20
+	banpoint(player, 2, "AutoClick")
+on join:
+	clear {click.%player%}
+
+
+on join:
+	set {Craft.%player%} to 0
+
+on craft:
+	add 1 to {Craft.%player%}
+	if {Craft.%player%} > 8:
+		banpoint(player, 1, "AutoCraft")
+		wait 0.5 second
+		add -1 to {Craft.%player%}
+		
+#WATERWALK/JESUS RanTheHorse
+on walk on water:
+	if "%{strikackers.waterwalk}%" = "On" or "on" or "true":
+		player's gamemode is not creative
+		player is not riding
+		player is not sneaking
+		if block below player is water:
+			if block south below player is water:
+				if block north below player is water:
+					if block west below player is water:
+						if block east below player is water:
+							if block south player is air:
+								if block north player is air:
+									if block west player is air:
+										if block east player is air:
+											banpoint(player, 3, "WaterWalk/Jesus Mode")
+#
+
+
+command /clearjesus:
+	trigger:
+		clear {Alerte.Jesus.%player%}
+#
+on any move:
+	if "%{strikackers.waterwalk}%" = "On" or "on" or "true":
+		if player's gamemode is not creative:
+			if player is sneaking:
+				stop
+			else:
+				if block below player is water:
+					if block south below player is water:
+						if block north below player is water:
+							if block west below player is water:
+								if block east below player is water:
+									if block south player is air:
+										if block north player is air:
+											if block west player is air:
+												if block east player is air:
+													banpoint(player, 3, "WaterWalk/Jesus Mode")
+every 1 second:
+	loop all players:
+		clear {Alerte.Jesus.%loop-player%}
+#
+
+on jump:
+	if "%{strikackers.waterwalk}%" = "On" or "on" or "true":
+		if block below player is water:
+			if block south below player is water:
+				if block north below player is water:
+					if block west below player is water:
+						if block east below player is water:
+							if block south player is air:
+								if block north player is air:
+									if block west player is air:
+										if block east player is air:
+											banpoint(player, 3, "WaterWalk/Jesus Mode")
+#
+
+
+#ANTI SNEAK 
+on chat:
+	if "%{strikackers.AntiAutoSneak}%" = "On" or "on" or "true":
+		if player is sneaking:
+			banpoint(player, 1.5, "AutoSneak")
+on inventory open :
+	if "%{strikackers.AntiAutoSneak}%" = "On" or "on" or "true":
+		if player is sneaking:
+			banpoint(player, 1.5, "AutoSneak")
+on sign change:
+	if "%{strikackers.AntiAutoSneak}%" = "On" or "on" or "true":
+		if player is sneaking:
+			banpoint(player, 1.5, "AutoSneak")
+
+
+#ANTI ANTI-KB
+on damage of a player :
+	if "%{strikackers.AntiKnockback}%" = "On" or "on" or "true":
+		block at victim is not cobweb	
+		victim is not riding
+		set {_loc9} to block north east victim
+		set {_loc8} to block south west victim
+		blocks within {_loc9} to {_loc8} is air
+		set {_loc} to location of victim
+		wait 10 ticks
+		set {_loc2} to location of victim
+		distance between {_loc} and {_loc2} = 0
+		victim's ping < 250
+		banpoint(attacker, 4, "AntiKB")
+#
+
+
+
+#Anti-Fast eat a modifier joel, refait entièrement par tutur1004
+on rightclick: 
+	if player is holding {@food}:
+		if "%{strikackers.AntiAutoEat}%" = "On" or "on" or "true":
+			set {lastfood.rightclick.%player%} to now
+#
+on player eat of {@food}:
+	if "%{strikackers.AntiAutoEat}%" = "On" or "on" or "true":
+		if difference between {lastfood.rightclick.%player%} and now < {strikackers.eattime}:
+			banpoint(player, 4, "FastEat")
+#
+
+
+
+
+#Anti fast bow joel, edit par tutur1004
+
+on shoot:
+	if "%{strikackers.AntiSpeedBow}%" = "On" or "on" or "true":
+		if projectile is an arrow: 
+			if difference between {fbow.%shooter%.last} and now is less than {strikackers.bowcooldown}:
+				cancel event
+				banpoint(shooter, 1, "FastBow")
+				wait 1 tick
+				kick the shooter due to "%{strikackers.prefix}% &4>> FastBow présumé!"
+			set {fbow.%shooter%.last} to now
+#
+
+
+
+#ANTISPEEDHACK====================================== Joel, edit par tutur1004
+on any move:
+	if "%{strikackers.AntiSpeedHack}%" = "On" or "on" or "true":
+		if player doesn't have SPEED:
+			if player's gamemode is not creative:
+				if {_cdpos} is not set :
+					set {_cdpos} to true
+				if {_cdpos} is true:
+					set {_cdpos} to false
+					set {_pos} to location of player
+					wait 0.5 second
+					set y-coord of {_pos} to y-coord of location of player
+					if distance between {_pos} and player is bigger than {strikackers.SpeedHack}:
+						banpoint(player, 2, "SpeedHack")
+						set {_cdpos} to true
+#
+#AntiFly par RanTheHorse
+every {@AntiFlyTiming} seconds:
+	if "%{shrakplugins/Strikackers/StrikOfig.yml.AntiFly}%" = "On" or "on" or "true":
+		loop all players:
+			loop-player is not flying
+			loop-player's gamemode is not creative
+			set {_y.%loop-player%} to the y location of loop-player
+			wait 1 second
+			set {_y2.%loop-player%} to the y location of loop-player
+			wait 1 tick
+			{_y.fly} = {_y2.%loop-player%} - {_y.%loop-player%}
+			if {_y.fly} > {strikackers.FlyBloc}:
+				banpoint(loop-player, 2, "Fly Mode")
+#
+every {@AntiFlyTiming} seconds:
+	if "%{strikackers.AntiSpeedHack}%" = "On" or "on" or "true":
+		loop all players:
+			if loop-player is not flying:
+				if loop-player's gamemode is not creative:
+					set {z.%loop-player%} to the z location of loop-player
+					wait 0.5 second
+					set {z2.%loop-player%} to the z location of loop-player
+					wait 1 tick
+					if difference between {z.%loop-player%} and {z2.%loop-player%} is greater than {strikackers.AntiSpeedHack}:
+						banpoint(loop-player, 2, "SpeedHack")
+#
+every {@AntiFlyTiming} seconds:
+	if "%{strikackers.AntiSpeedHack}%" = "On" or "on" or "true":
+		loop all players:
+			if loop-player is not flying:
+				if loop-player's gamemode is not creative:
+					set {x.%loop-player%} to the x location of loop-player
+					wait 0.5 second
+					set {x2.%loop-player%} to the x location of loop-player
+					wait 1 tick
+					if difference between {x.%loop-player%} and {x2.%loop-player%} is greater than {strikackers.AntiSpeedHack}:
+						banpoint(loop-player, 2, "SpeedHack")
+#
+# ANTI REACH by RanTheHorse 
+on damage:
+	if "%{strikackers.antireach}%" = "On" or "on" or "true":
+		if attacker is a player:
+			if victim is a player:
+				if attacker's gamemode is not creative:
+					set {_distance} to distance between attacker and victim
+					if {_distance} > {strikackers.MaxDist}:
+						if damage cause is not a projectile:
+							banpoint(attacker, 2, "Reach Hack")
+#
+
+
+#FREEZE by RanTheHorse
+command /freeze [<player>]:
+	permission: "freeze.perm"
+	permission message: &cVous n'ête pas modérateur
+	trigger:
+		set {freeze.%uuid of arg 1%} to true
+		set {freeze.freezer.%uuid of arg 1%} to "%player%"
+		send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%player% &9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3" to arg 1
+		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
+			teamspeak(arg 1)
+		else:
+			send "&cMalheureusement, aucune IP n'a été renseignée."
+#
+on any move:
+	if {freeze.%uuid of player%} is true:
+		cancel event
+		send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
+		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
+			teamspeak(player)
+		else:
+			send "&cMalheureusement, aucune IP n'a été renseignée." to {freeze.freezer.%uuid of player%}
+			
+#
+on command:
+	if {freeze.%uuid of player%}:
+		if command is not "teamspeak" or "ts" or "ts3" or "teamspeak3":
+			cancel event
+			send "%{strikackers.prefix}% &c>>> &9Vous avez été freeze par &1%{freeze.freezer.%uuid of player%}%&9, Vous avez 1 minute pour vous connecter sur le TeamSpeak 3"
+			if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
+				teamspeak(player)
+			else:
+				send "&cMalheureusement, aucune IP n'a été renseignée." to {freeze.freezer.%uuid of player%}
+#
+command /unfreeze [<player>]:
+	permission: "freeze.perm"
+	permission message: &cVous n'ête pas modérateur
+	trigger:
+		set {freeze.%uuid of arg 1%} to false
+		send "&2Vous n'êtes plus Freeze !" to arg 1
+
+command /ts:
+	aliases: teamspeak, teamspeak3, ts3
+	trigger:
+		if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
+			teamspeak(player)
+		else:
+			send "&cMalheureusement, aucune IP n'a été renseignée."
+#Fin freeze
+
+
+#
+function SharkLoad(t: text):
+	set {Shark-plugins/Strikackers/StrikOfig.yml} to script's name
+	set {strikackers.prefix} to value "prefix" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.perm-use} to value "perm-use" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.perm-notify} to value "perm-notify" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.perm-admin} to value "perm-admin" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.perm-exempt} to value "perm-exempt" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.plugin-efficiency} to value "plugin-efficiency" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.eattime} to value "eattime" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.bowcooldown} to value "bowcooldown" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.MaxDist} to value "MaxDist" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.SpeedHack} to value "SpeedHack" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiFlyTimming} to value "AntiFlyTimming" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiFlyTimming} to {strikackers.AntiFlyTimming} parsed as integer
+	set {strikackers.ip-ts3} to value "ip-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.port-ts3} to value "port-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.food} to value "food" get of "plugins/Strikackers/StrikOfig.yml"
+	wait 2 ticks
+	set file "plugins/Skript/scripts/%{Shark-plugins/Strikackers/StrikOfig.yml}%.sk"'s line 22 to "    food: %{strikackers.food}%"
+	set file "plugins/Skript/scripts/%{Shark-plugins/Strikackers/StrikOfig.yml}%.sk"'s line 23 to "    AntiFlyTiming: %{strikackers.AntiFlyTimming}%"
+	set file "plugins/Skript/scripts/%{Shark-plugins/Strikackers/StrikOfig.yml}%.sk"'s line 24 to "    ip: %{strikackers.ip-ts3}%"
+	set file "plugins/Skript/scripts/%{Shark-plugins/Strikackers/StrikOfig.yml}%.sk"'s line 25 to "    port: %{strikackers.port-ts3}%"
+	wait 2 ticks
+	set {strikackers.mode-ts3} to value "activer-ts3" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiAutoFish} to value "AntiAutoFish" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiFly} to value "AntiFly" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiSpeedHack} to value "AntiSpeedHack" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiSpeedBow} to value "AntiFastBow" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiReach} to value "AntiReach" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiAutoEat} to value "AntiFastEat" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiKnockback} to value "AntiKnockback" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.waterwalk} to value "WaterWalk" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.AntiAutoSneak} to value "AntiAutoSneak" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.FlyBloc} to value "DistanceFly" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.ping} to value "ping" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.tps} to value "tps" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.lightning-player} to value "lightning-player" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.sound-warn} to value "sound-warn" get of "plugins/Strikackers/StrikOfig.yml"
+	set {strikackers.sound-type} to value "sound-type" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+	#set {strikackers.} to value "" get of "plugins/Strikackers/StrikOfig.yml"
+
+function SharkLogs(t: text):
+	create file "plugins/Sharkplugins/Strikackers/StrikOfig.yml/log/" #Création du fichier log
+
+
+#
+command /anticheat [<text>]: 
+	aliases: at, ac, antic, cheat
+	permission: "%{strikackers.perm-use}%"
+	trigger:
+		if arg 1 is not set:
+			send "&cErreur de syntaxe&6: &2/anticheat info"
+		if arg 1 is "info":
+			if {ban.point.%player%} is set:
+				send "&6Vous êtes à &b%{ban.point.%player%}%&a%% &6du bannissement."
+			else:
+				send "&2Félicitation aucune de vos actions n'a été suspectée de &bHack"
+#
+command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]:
+	aliases: st-admin, anticheat-admin
+	permission: "%{strikackers.perm-admin}%"
+	trigger:
+		if arg 1 is not set:
+			send "&cErreur de syntaxe&6: &5/sharkplugins/Strikackers/StrikOfig.yml-admin &2<argument>"
+			send "&2<argument> &c= &2<reload &c/ &2stats &c/ &2Notif &c/ &emanage &c/ &creset&2>"
+		if arg 1 is "reset":
+			delete file "plugins/Strikackers/StrikOfig.yml"
+			SharkFile("yolo")
+			send "&2La config a été parfaitement &4RESET"
+			wait 1 tick
+			execute console command "skript reload %script%"
+		if arg 1 is "reload":
+			send "&2La config a été parfaitement reload"
+			wait 1 tick
+			execute console command "skript reload %script%"
+		if arg 1 is "Notif" or "Notifs":
+			if arg 2 is not set:
+				send "&cErreur de syntaxe&6: &5/sharkplugins/Strikackers/StrikOfig.yml-admin notif &2<on/off>"
+			else:
+				if arg 2 is "on" or "On":
+					set {strikackers.admin.notif.%player%} to true
+					send "&2Vos notifications de Cheat sont activées !"
+				if arg 2 is "Off" or "off":
+					set {strikackers.admin.notif.%player%} to false
+					send "&cVos notifications de Cheat sont désactivées !"
+		if arg 1 is "stats":
+			send ""
+			send ""
+			send "%{strikackers.prefix}% &f>> &2Modules&c:"
+			if "%{strikackers.AntiAutoFish}%" = "On" or "on" or "true":
+				send "&6Anti &bAutoFish &2[ON]"
+			else:
+				send "&6Anti &bAutoFish &c[OFF]"
+			if "%{strikackers.AntiFly}%" = "On" or "on" or "true":
+				send "&6Anti &bFly &2[ON]"
+			else:
+				send "&6Anti &bAntiFly &c[OFF]"
+			if "%{strikackers.AntiSpeedHack}%" = "On" or "on" or "true":
+				send "&6Anti &bSpeedHack &2[ON]"
+			else:
+				send "&6Anti &bSpeedHack &c[OFF]"
+			if "%{strikackers.AntiSpeedBow}%" = "On" or "on" or "true":
+				send "&6Anti &bSpeedBow &2[ON]"
+			else:
+				send "&6Anti &bSpeedBow &c[OFF]"
+			if "%{strikackers.AntiReach}%" = "On" or "on" or "true":
+				send "&6Anti &bReach &2[ON]"
+			else:
+				send "&6Anti &bReach &c[OFF]"
+			if "%{strikackers.AntiAutoEat}%" = "On" or "on" or "true":
+				send "&6Anti &bAutoEat &2[ON]"
+			else:
+				send "&6Anti &bAutoEat &c[OFF]"
+			if "%{strikackers.AntiKnockback}%" = "On" or "on" or "true":
+				send "&6Anti &bKnockback &2[ON]"
+			else:
+				send "&6Anti &bKnockback &c[OFF]"
+			if "%{strikackers.waterwalk}%" = "On" or "on" or "true":
+				send "&6Anti &bwaterwalk &2[ON]"
+			else:
+				send "&6Anti &bwaterwalk &c[OFF]"
+			if "%{strikackers.AntiAutoSneak}%" = "On" or "on" or "true":
+				send "&6Anti &bAutoSneak &2[ON]"
+			else:
+				send "&6Anti &bAutoSneak &c[OFF]"
+			if "%{strikackers.mode-ts3}%" = "On" or "on" or "true":
+				send ">> &6TeamSpeak 3 &2[ON]"
+			else:
+				send ">> &6TeamSpeak 3 &c[OFF]"
+		if arg 1 is "manage" or "config":
+			if arg 2 is not set:
+				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
+				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
+			if arg 2 = "reload" or "Reload":
+				SharkLoad("yolo")
+				send "&2Toutes vos configs ont été reload !!"
+				stop trigger
+			if arg 3 is not set:
+				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
+				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
+			else:
+				if arg 3 = "On" or "on":
+					if arg 2 = "AutoFish" or "Fish":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: On"
+					if arg 2 = "Fly":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: On"
+					if arg 2 = "SpeedHack" or "Speed":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: On"
+					if arg 2 = "FastBow" or "Bow":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: On"
+					if arg 2 = "Reach" or "Rich":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: On"
+					if arg 2 = "FastEat" or "Eat":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: On"
+					if arg 2 = "Knockback" or "KB":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: On"
+					if arg 2 = "WaterWalk" or "Jesus" or "Water":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: On"
+					if arg 2 = "AutoSneak" or "Sneak":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: On"
+				if arg 3 = "Off" or "off":
+					if arg 2 = "AutoFish" or "Fish":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: Off"
+					if arg 2 = "Fly":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: Off"
+					if arg 2 = "SpeedHack" or "Speed":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: Off"
+					if arg 2 = "FastBow" or "Bow":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: Off"
+					if arg 2 = "Reach" or "Rich":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: Off"
+					if arg 2 = "FastEat" or "Eat":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: Off"
+					if arg 2 = "Knockback" or "KB":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: Off"
+					if arg 2 = "WaterWalk" or "Jesus" or "Water":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: Off"
+					if arg 2 = "AutoSneak" or "Sneak":
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: Off"
+				if arg 2 = "all" or "All":
+					if arg 3 = "Off" or "off":
+						send "&6Vous avez &cdésactivé &6tous les Anti Hack"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: Off"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: Off"
+					if arg 3 = "On" or "on":
+						send "&6Vous avez &aActivé &6tous les Anti Hack"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 73 to "AntiAutoFish: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 76 to "AntiFly: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 79 to "AntiSpeedHack: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 82 to "AntiFastBow: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 85 to "AntiReach: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 88 to "AntiFastEat: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 91 to "AntiKnockback: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 94 to "WaterWalk: On"
+						set file "plugins/Strikackers/StrikOfig.yml"'s line 97 to "AntiAutoSneak: On"
+				SharkLoad("yolo")
+#
+on load:
+	if folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" doesn't exists: #Vérification du dossier
+		send "&e&lLe dossier plugins/Sharkplugins/Strikackers/StrikOfig.yml/ n'existe pas ! " to console
+		send "&aCréation du dossier en cours." to console
+		create folder "plugins/Sharkplugins/Strikackers/StrikOfig.yml/" #Création du dossier
+		send "&2Dossier créée" to console
+	if file "plugins/Strikackers/StrikOfig.yml" doesn't exists: #Vérification du fichier
+		download file from "##LINK##" to file "plugins/Skript/scripts/noHax-Updater.sk"
+#
+#	Récupération des données du YAML
+on load:
+	wait 1 second
+	SharkLoad("yolo")
+#
