@@ -139,7 +139,7 @@ on load:
 	set file "plugins/Strikackers/StrikOfig.yml"'s line 100 to "food: %{_var.food}%"
 	#
 	send "&2Update de &bStrikackers &2effectuée !" to console
-	download file from "https://github.com/tutur1004/Strikackers/raw/master/plugins/Skript/scripts/Strikackers.sk" to file "plugins/Skript/scripts/Strikackers.sk"
+	download file from "https://raw.githubusercontent.com/tutur1004/Strikackers/master/plugins/Skript/scripts/Strikackers.sk" to file "plugins/Skript/scripts/Strikackers.sk"
 	wait 1 tick
 	execute console command "skript reload Strikackers.sk"
 	delete script "plugins/Skript/scripts/%script%.sk"
