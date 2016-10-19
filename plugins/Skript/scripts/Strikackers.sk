@@ -430,12 +430,12 @@ command /anticheat [<text>]:
 			else:
 				send "&2Félicitation aucune de vos actions n'a été suspectée de &bHack"
 #
-command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]:
+command /sharkplugins-admin [<text>] [<text>] [<text>]:
 	aliases: st-admin, anticheat-admin
 	permission: "%{strikackers.perm-admin}%"
 	trigger:
 		if arg 1 is not set:
-			send "&cErreur de syntaxe&6: &5/sharkplugins/Strikackers/StrikOfig.yml-admin &2<argument>"
+			send "&cErreur de syntaxe&6: &5/sharkplugins-admin &2<argument>"
 			send "&2<argument> &c= &2<reload &c/ &2stats &c/ &2Notif &c/ &emanage &c/ &creset&2>"
 		if arg 1 is "reset":
 			delete file "plugins/Strikackers/StrikOfig.yml"
@@ -449,7 +449,7 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 			execute console command "skript reload %script%"
 		if arg 1 is "Notif" or "Notifs":
 			if arg 2 is not set:
-				send "&cErreur de syntaxe&6: &5/sharkplugins/Strikackers/StrikOfig.yml-admin notif &2<on/off>"
+				send "&cErreur de syntaxe&6: &5/sharkplugins-admin notif &2<on/off>"
 			else:
 				if arg 2 is "on" or "On":
 					set {strikackers.admin.notif.%player%} to true
@@ -503,16 +503,16 @@ command /sharkplugins/Strikackers/StrikOfig.yml-admin [<text>] [<text>] [<text>]
 				send ">> &6TeamSpeak 3 &c[OFF]"
 		if arg 1 is "manage" or "config":
 			if arg 2 is not set:
-				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
-				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&cErreur de syntaxe&6: &2/sharkplugins-admin manage <module> <on/off>"
+				send "&bLa liste peut être obtenue en fesant /sharkplugins-admin"
 				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
 			if arg 2 = "reload" or "Reload":
 				SharkLoad("yolo")
 				send "&2Toutes vos configs ont été reload !!"
 				stop trigger
 			if arg 3 is not set:
-				send "&cErreur de syntaxe&6: &2/sharkplugins/Strikackers/StrikOfig.yml-admin manage <module> <on/off>"
-				send "&bLa liste peut être obtenue en fesant /sharkplugins/Strikackers/StrikOfig.yml-admin"
+				send "&cErreur de syntaxe&6: &2/sharkplugins-admin manage <module> <on/off>"
+				send "&bLa liste peut être obtenue en fesant /sharkplugins-admin"
 				send "&2Exemple&c: &6/anticheat-admin manage AutoSneak on &b--> &6Anti &bAutoSneak &2[ON]"
 			else:
 				if arg 3 = "On" or "on":
