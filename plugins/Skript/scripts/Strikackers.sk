@@ -439,6 +439,8 @@ command /sharkplugins-admin [<text>] [<text>] [<text>]:
 			send "&cErreur de syntaxe&6: &5/sharkplugins-admin &2<argument>"
 			send "&2<argument> &c= &2<reload &c/ &2stats &c/ &2Notif &c/ &emanage &c/ &creset&2>"
 		if arg 1 is "reset":
+			if arg 2 is "all":
+				delete file "plugins/Strikackers/StrikOfig.yml	
 			download file from "https://raw.githubusercontent.com/tutur1004/Strikackers/master/Strikupdater.sk" to file "plugins/Skript/scripts/Strikupdater.sk"
 			execute console command "skript reload Strikupdater.sk"
 		if arg 1 is "reload":
