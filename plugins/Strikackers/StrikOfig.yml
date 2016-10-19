@@ -12,7 +12,7 @@
 #Config générales du plugin :
 
 #Prefix (Le mot qui sera devant chaque messages)
-prefix: §e[Shark-Strike]
+prefix: §e[Strikackers]
 
 #	Système de d'auto connection au TeamSpeak3 (Skript par tutur1004 https://skript-mc.fr/forum/resources/teamspeak-autojoin.609/) Mettre false pour désactiver le ts3
 activer-ts3: false
